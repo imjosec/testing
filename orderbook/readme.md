@@ -8,7 +8,7 @@
 - It might require more code for error handling and perhaps some extra automated integration testing.
 - It would improve performance, if we could minimize object allocation when parsing the messages, as I assume that adding messages is the most common operation
 # Verbal Questions
-##Question 1:
+## Question 1:
 ```
 {
 "exchange": "GMAX", "symbol": "ETH/USD",
@@ -21,25 +21,25 @@
 {"level": 319,"size": 50 }]
 }
 ```
-##Question 2:
+## Question 2:
 If we're missing data, we could end up in sutuations like:
 - missing levels in the order book
 - not able to remove existing orders
 - executing orders at wrong level
 - errors when playing executions, as levels won't exist
-##Question 3:
+## Question 3:
 - We could stream all the data using Kafka.
 - Use segmentation, so we'll have topics that will feed several consumers, all from the data that we're streaming, so we could have several consumers, all updating a fast database like: Redis, Memcached, Apache Ignite, Riak.
 - The clients will query the database directly.
 - I assume that the clients will be interested only in order book top levels (ie. 3 or 4 levels), that will minimize data published by consumers.
 - The numbers of consumers will depend on the number of exchanges/symbols and the hardware that we have available.
-##Question 4:
+## Question 4:
 = It's a similar solution to the previous one.
 - We could stream all the data using Kafka.
 - Use segmentation creating topics, but they need to publish the data only at the end of the process.
 - Consumers might have some message type to indicate end of the flow, so they can flush all the data to the database.
 - The numbers of consumers will depend on the number of exchanges/symbols and the hardware that we have available.
-##Bonus Question:
+## Bonus Question:
 The date is 2017/07/22. 
 - Ethereum briefly crashed from $319 to 10 cents in seconds on one exchange (GDAX) after ‘multimillion dollar’ trade
 - Many ethereum traders lost large sums of money
